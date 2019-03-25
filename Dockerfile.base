@@ -25,4 +25,4 @@ WORKDIR /srv
 RUN /opt/anaconda3/bin/conda env create -f environment.yml
 RUN python -m ipykernel install --name $env_name --display-name $env_name
 CMD ["jupyterlab", "--debug"]
-ENTRYPOINT ["exec '$@'"]
+ENTRYPOINT exec '$@'
