@@ -11,6 +11,7 @@ RUN \
         ipykernel                                   \
         ipywidgets                                  \
         jupyterlab                                  \
+        nb_conda_kernels                            \
         notebook                                &&  \
     /opt/anaconda3/bin/ipython kernel install   &&  \
     /opt/anaconda3/bin/conda clean --yes --all
