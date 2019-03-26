@@ -10,6 +10,7 @@ RUN \
     /opt/anaconda3/bin/conda install --yes          \
         ipykernel                                   \
         ipywidgets                                  \
+        jupyterlab                                  \
         notebook                                &&  \
     /opt/anaconda3/bin/ipython kernel install   &&  \
     /opt/anaconda3/bin/conda clean --yes --all
@@ -24,5 +25,4 @@ ADD environment.yml $nb_name /srv/
 WORKDIR /srv
 RUN /opt/anaconda3/bin/conda env create -f environment.yml
 RUN python -m ipykernel install --name $env_name --display-name $env_name
-CMD ["jupyterlab", "--debug"]
-ENTRYPOINT exec '$@'
+ENTRYPOINT jupyter lab --ip=0.0.0.0 --port=8888 --allow-root
