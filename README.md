@@ -4,7 +4,7 @@ To build (and tag) the image:
 
 To run the image and start a local JupyterLab instance:
 
-`docker run c2d:latest -p 8888`
+`docker run --rm -it c2d:latest -p 8888`
 
 This will start a JupyterLab server in the container. In the terminal, the
 LabApp will display a message like
