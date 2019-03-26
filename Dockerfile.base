@@ -20,9 +20,16 @@ RUN \
 RUN \
     /opt/anaconda3/bin/jupyter nbextension enable --sys-prefix --py widgetsnbextension
 
-ADD environment.yml $nb_name /srv/
+ADD docker-entrypoint.sh environment.yml $nb_name /srv/
 
 WORKDIR /srv
 RUN /opt/anaconda3/bin/conda env create -f environment.yml
-RUN python -m ipykernel install --name $env_name --display-name $env_name
-ENTRYPOINT jupyter lab --ip=0.0.0.0 --port=8888 --allow-root
+RUN \
+    . /opt/anaconda3/etc/profile.d/conda.sh                               && \
+    conda activate $env_name                                              && \
+    python -m ipykernel install --name $env_name --display-name $env_name && \
+    conda deactivate
+RUN chmod +x docker-entrypoint.sh
+CMD ["jupyter", "lab", "--debug", "--ip=0.0.0.0", "--port=8888", "--allow-root", "--no-browser"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
+
