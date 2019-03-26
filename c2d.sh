@@ -22,6 +22,6 @@ sed '2i\'"ARG nb_name=${nb_name}.ipynb" Dockerfile.base > Dockerfile
 env_name=$(head -n 1 environment.yml | cut -d ' ' -f2)
 sed -i '29i\'"ENV env_name=${env_name}" Dockerfile
 
-tar -cf ${nb_name}.tar Dockerfile environment.yml ${nb_name}.ipynb
-#rm Dockerfile environment.yml
+tar -cf ${nb_name}.tar Dockerfile docker-entrypoint.sh environment.yml ${nb_name}.ipynb
+rm Dockerfile environment.yml
 
