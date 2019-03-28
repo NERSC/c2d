@@ -9,8 +9,8 @@ This will generate a file called `<notebook name>.tar` which contains a copy of
 your notebook as well as other files needed to set up and run the local
 containerized JupyterLab server.
 
-Move this tarball *and any data you're working with* to your local machine, and
-uncompress the files with:
+Move this tarball **and any data you're working with** to your local machine,
+and uncompress the files with:
 
 `tar xf <notebook name>.tar`
 
