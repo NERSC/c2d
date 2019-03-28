@@ -1,7 +1,42 @@
-ARG branch="19-03"
 
-FROM registry.spin.nersc.gov/das/jupyter-base.${branch}:latest
-LABEL maintainer="Rollin Thomas <rcthomas@lbl.gov>"
+FROM ubuntu:16.04
+LABEL maintainer="Kelly Rowland <kellyrowland@lbl.gov>"
+# adapted from Rollin Thomas <rcthomas@lbl.gov>
+
+# Base Ubuntu packages
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV LANG C.UTF-8
+
+RUN \
+    apt-get update          &&  \
+    apt-get --yes upgrade   &&  \
+    apt-get --yes install       \
+        bzip2                   \
+        curl                    \
+        git                     \
+        libffi-dev              \
+        lsb-release             \
+        tzdata                  \
+        vim                     \
+        wget
+
+# Timezone to Berkeley
+
+ENV TZ=America/Los_Angeles
+RUN \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime  &&  \
+    echo $TZ > /etc/timezone
+
+# Python 3 Miniconda
+
+RUN \
+    curl -s -o /tmp/miniconda3.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh    &&  \
+    bash /tmp/miniconda3.sh -f -b -p /opt/anaconda3         &&  \
+    rm -rf /tmp/miniconda3.sh                               &&  \
+    echo "python 3.6.*" >> /opt/anaconda3/conda-meta/pinned
+
+ENV PATH=/opt/anaconda3/bin:$PATH
 
 # Python 3 Anaconda and additional packages
 
