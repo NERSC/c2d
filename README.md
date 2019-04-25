@@ -1,3 +1,19 @@
+To use this script on Cori:
+
+  * Load a Python module and activate the Conda environment used for your
+    notebook
+
+`./c2d.sh <notebook name>`
+
+This will generate a file called `<notebook name>.tar` which contains a copy of
+your notebook as well as other files needed to set up and run the local
+containerized JupyterLab server.
+
+Move this tarball **and any data you're working with** to your local machine,
+and uncompress the files with:
+
+`tar xf <notebook name>.tar`
+
 To build (and tag) the image:
 
 `docker build . -t c2d`
