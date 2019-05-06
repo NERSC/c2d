@@ -3,7 +3,7 @@ To use this script on Cori:
   * Load a Python module and activate the Conda environment used for your
     notebook
 
-`./c2d.sh <notebook name>`
+`./c2d <notebook name>`
 
 This will generate a file called `<notebook name>.tar` which contains a copy of
 your notebook as well as other files needed to set up and run the local
